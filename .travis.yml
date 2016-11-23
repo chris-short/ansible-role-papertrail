@@ -60,7 +60,5 @@ script:
   # Ensure remote_syslog.service is running.
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm systemctl -l is-enabled remote_syslog'
 
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/messages'
-
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
