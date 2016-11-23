@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/chris-short/ansible-role-papertrail.svg?branch=master)](https://travis-ci.org/chris-short/ansible-role-papertrail)
+
 Role Name
 =========
 
