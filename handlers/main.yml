@@ -1,0 +1,6 @@
+---
+- name: restart rsyslog
+  service: name=rsyslog state=restarted
+
+- name: enable remote_syslog
+  service: name=remote_syslog.service state=restarted enabled=yes

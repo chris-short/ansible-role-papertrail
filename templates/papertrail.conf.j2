@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+# http://help.papertrailapp.com/kb/configuration/encrypting-remote-syslog-with-tls-ssl/#rsyslog
+
+$DefaultNetstreamDriverCAFile /etc/pki/tls/certs/papertrail-bundle.pem
+$ActionSendStreamDriver gtls
+$ActionSendStreamDriverMode 1
+$ActionSendStreamDriverAuthMode x509/name
+$ActionSendStreamDriverPermittedPeer *.papertrailapp.com
+
+*.*          @@{{ papertrail_host }}:{{ papertrail_port }}

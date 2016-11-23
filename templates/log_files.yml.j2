@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+---
+files:
+{% for item in papertrail_files %}
+  - {{ item }}
+{% endfor %}
+
+destination:
+  host: {{ papertrail_host }}
+  port: {{ papertrail_port }}
+  protocol: tls
