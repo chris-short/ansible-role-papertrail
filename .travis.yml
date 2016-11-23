@@ -34,7 +34,7 @@ script:
   # Run the role/playbook with ansible-playbook.
   - >
     docker exec --tty "$(cat ${container_id})" env TERM=xterm
-    ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml
+    ansible-playbook /etc/ansible/roles/ansible-role-papertrail/tests/test.yml
 
   # Run the role/playbook again, checking to make sure it's idempotent.
   - idempotence=$(mktemp)
