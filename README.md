@@ -1,7 +1,8 @@
-[![Build Status](https://travis-ci.org/chris-short/ansible-role-papertrail.svg?branch=master)](https://travis-ci.org/chris-short/ansible-role-papertrail)
 
 Ansible Role: Papertrail
 =========
+
+[![Build Status](https://travis-ci.org/chris-short/ansible-role-papertrail.svg?branch=master)](https://travis-ci.org/chris-short/ansible-role-papertrail)
 
 Papertrail can utilize rsyslog and it's go utility remote_syslog2. This role configures and deploys all the neccessary bits to utilize Papertrail on EL7 systems
 
