@@ -1,22 +1,25 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Papertrail can utilize rsyslog and it's go utility remote_syslog2. This role configures and deploys all the neccessary bits to utilize Papertrail on EL7 systems
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+rsyslog is an obvious requirement that should be installed in most EL7 systems
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+papertrail_version is the version number of the remote_syslog tool you wish to use.
+papertrail_files is an array of absolute paths to logs you want remote_syslog to send to the Papertrail service
+papertrail_host is the hostname provided by Papertrail for your use
+papertrail_port is the port number provided by Papertrail for your use
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+N/A
 
 Example Playbook
 ----------------
@@ -25,7 +28,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - papertrail
 
 License
 -------
@@ -35,4 +38,5 @@ MIT/BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Chris Short
+https://chrisshort.net
