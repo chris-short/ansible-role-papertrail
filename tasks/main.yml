@@ -1,9 +1,9 @@
 ---
-- name: Check rsyslogd
-  service:
-    name=rsyslog
-    state=started
-    enabled=yes
+#- name: Check rsyslogd
+#  service:
+#    name=rsyslog
+#    state=started
+#    enabled=yes
 
 - name: Install necessary packages
   yum:
@@ -11,6 +11,7 @@
     state=latest
     update_cache=yes
   with_items:
+    - rsyslog
     - rsyslog-gnutls
 
 - name: Obtain Papertrail Cert
