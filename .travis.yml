@@ -7,7 +7,7 @@ env:
   - distro: centos7
     init: /usr/lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - distro: fedora24
+  - distro: fedora25
     init: /usr/lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - distro: ubuntu1604
@@ -23,7 +23,7 @@ services:
 
 before_install:
   # Pull container from Docker Hub.
-  - 'docker pull geerlingguy/docker-${distro}-ansible:latest'
+  - 'docker pull chrisshort/docker-${distro}-ansible:latest'
 
 script:
   # Start the container from the image and perform tests.
