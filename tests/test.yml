@@ -3,7 +3,7 @@
   remote_user: root
 
   pre_tasks:
-    - name: Ensure yum is available (Fedora)
+    - name: Ensure build dependencies are installed (Fedora).
       dnf: 'name="{{ item }}" state=present'
       with_items:
         - "@Development tools"
