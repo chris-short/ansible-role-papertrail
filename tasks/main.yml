@@ -9,7 +9,7 @@
 
 - name: Obtain Papertrail Cert
   get_url:
-    dest=/etc/pki/tls/certs/papertrail-bundle.pem
+    dest=/etc/ssl/certs/papertrail-bundle.pem
     url=https://papertrailapp.com/tools/papertrail-bundle.pem
   notify: restart rsyslog
 
