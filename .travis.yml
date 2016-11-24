@@ -7,9 +7,6 @@ env:
   - distro: centos7
     init: /usr/lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - distro: fedora25
-    init: /usr/lib/systemd/systemd
-    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - distro: ubuntu1604
     init: /lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
@@ -71,6 +68,3 @@ script:
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
-
-slack:
-  secure: FlqJDbBKnn8X+qVEiTlDe8GRP51pWfxXlNnuCoQGoACB5RoAUff1KTWVYB/GNi2QL3eeb2zN0IlAuECjZyytjNXs1tR4Vmj+SazFc/si0LGgqKeeQb0x1Xab0tQ7LfJheYW02pGicbXGaX5kdzd624Hkg9tLMKnisJmLjVzGW3GFfH2QVnPLnV0lnwSu5JPKDYK5qhV9+oQKupdFBVBo9ghpF6za3kxT6DLlcsgTXCaz51G1W30mNH6Jf5xTNq/y7nwaDyydhaDuwidCvrssLaNxgm55qbzpihDpHG91UGsQ2wcrFnChcibKah0Z/KTtGTCosTQ6JbIDx1HGOQBMyuueu+5f82gsYpiOjW7OZBinkxnWhnIxK5LrQws6y5kQ4bSP5to77K8nJSRW6gP6FuYftDX0HkCFlQkHBpLx7HY+9wMvc8kYi395UBOTrT//lINn9t0tWDIBPSdediWgMIUuOfA6jMmJ5NpZ5Zmr6cgz6Jk8Rawh+APPf2oIOQNcqTbxyOZj/NPIqqeBlJUReBqh/ucLtc7+PDixL3g0ie+6Uj9MMWyLkTLyqTsk+yI3uK7bl0slwqg9EOn5mffKL92Dj3k2huzjiK4NzwBVejSNQHyo8KZ3PgDOo3VDVfn5x3ABaSeomukDlZxVZQMF43eBttEWE9VtIPb1e8N76gs=
