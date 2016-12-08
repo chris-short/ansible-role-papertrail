@@ -2,8 +2,8 @@
 - name: restart rsyslog
   service: name=rsyslog state=restarted
 
-- name: enable remote_syslog
-  service: name=remote_syslog.service state=restarted enabled=yes
-
 - name: daemon-reload
   shell: systemctl daemon-reload
+
+- name: enable remote_syslog
+  service: name=remote_syslog.service state=restarted enabled=yes

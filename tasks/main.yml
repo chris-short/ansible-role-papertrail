@@ -55,5 +55,5 @@
     src=papertrail.service
     dest=/etc/systemd/system/remote_syslog.service
   notify:
-    - enable remote_syslog
     - daemon-reload
+    - enable remote_syslog
