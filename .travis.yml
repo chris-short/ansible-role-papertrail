@@ -34,7 +34,7 @@ script:
   # Check the role/playbook's syntax.
   - >
     docker exec --tty "$(cat ${container_id})" env TERM=xterm
-    ansible-playbook /etc/ansible/roles/ansible-role-papertrail/tests/test.yml
+    ansible-playbook -vvv /etc/ansible/roles/ansible-role-papertrail/tests/test.yml
     --syntax-check
 
   # Run the role/playbook with ansible-playbook.
