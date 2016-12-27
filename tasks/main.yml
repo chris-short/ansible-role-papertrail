@@ -20,7 +20,7 @@
     owner=root
     group=root
     backup=no
-  notify: restart rsyslog
+#  notify: restart rsyslog
 
 - name: Download remote_syslog
   get_url:
