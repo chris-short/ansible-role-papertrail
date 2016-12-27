@@ -11,7 +11,7 @@
   get_url:
     dest=/etc/ssl/certs/papertrail-bundle.pem
     url=https://papertrailapp.com/tools/papertrail-bundle.pem
-  notify: restart rsyslog
+#  notify: restart rsyslog
 
 - name: Deploy rsyslog conf for Papertrail
   template:
