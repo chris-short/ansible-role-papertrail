@@ -11,7 +11,7 @@
   get_url:
     dest=/etc/ssl/certs/papertrail-bundle.pem
     url=https://papertrailapp.com/tools/papertrail-bundle.pem
-#  notify: restart rsyslog
+  notify: restart rsyslog
 
 - name: Deploy rsyslog conf for Papertrail
   template:
@@ -20,7 +20,7 @@
     owner=root
     group=root
     backup=no
-#  notify: restart rsyslog
+  notify: restart rsyslog
 
 - name: Download remote_syslog
   get_url:
@@ -48,7 +48,7 @@
     owner=root
     group=root
     mode=0640
-  notify: enable remote_syslog
+  notify: enable remote syslog
 
 - name: Create remote_syslog systemd service
   template:
@@ -56,4 +56,4 @@
     dest=/etc/systemd/system/remote_syslog.service
   notify:
     - daemon-reload
-    - enable remote_syslog
+    - enable remote syslog

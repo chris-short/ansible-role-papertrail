@@ -5,5 +5,5 @@
 - name: daemon-reload
   shell: systemctl daemon-reload
 
-- name: enable remote_syslog
-  service: name=remote_syslog.service enabled=yes
+- name: enable remote syslog
+  service: name=remote_syslog.service enabled=yes state=started
