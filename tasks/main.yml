@@ -1,40 +1,40 @@
 ---
 - name: Install necessary packages
   package:
-    name={{ item }}
-    state=latest
+    name: "{{ item }}"
+    state: latest
   with_items:
     - rsyslog
     - rsyslog-gnutls
 
 - name: Obtain Papertrail Cert
   get_url:
-    dest=/etc/ssl/certs/papertrail-bundle.pem
-    url=https://papertrailapp.com/tools/papertrail-bundle.pem
+    dest: /etc/ssl/certs/papertrail-bundle.pem
+    url: https://papertrailapp.com/tools/papertrail-bundle.pem
   notify: restart rsyslog
 
 - name: Deploy rsyslog conf for Papertrail
   template:
-    src=papertrail.conf.j2
-    dest=/etc/rsyslog.d/papertrail.conf
-    owner=root
-    group=root
-    backup=no
+    src: papertrail.conf.j2
+    dest: /etc/rsyslog.d/papertrail.conf
+    owner: root
+    group: root
+    backup: no
   notify: restart rsyslog
 
 - name: Download remote_syslog
   get_url:
-    url="https://github.com/papertrail/remote_syslog2/releases/download/v{{ papertrail_version }}/remote_syslog_linux_amd64.tar.gz"
-    dest="/usr/local/src/remote_syslog_{{ papertrail_version }}_linux_amd64.tar.gz"
+    url: "https://github.com/papertrail/remote_syslog2/releases/download/v{{ papertrail_version }}/remote_syslog_linux_amd64.tar.gz"
+    dest: "/usr/local/src/remote_syslog_{{ papertrail_version }}_linux_amd64.tar.gz"
 
 - name: Extract remote_syslog
   unarchive:
-    src="/usr/local/src/remote_syslog_{{ papertrail_version }}_linux_amd64.tar.gz"
-    dest=/usr/local/src/
-    copy=no
-    owner=root
-    group=root
-    creates=/usr/local/src/remote_syslog/remote_syslog
+    src: "/usr/local/src/remote_syslog_{{ papertrail_version }}_linux_amd64.tar.gz"
+    dest: /usr/local/src/
+    copy: no
+    owner: root
+    group: root
+    creates: /usr/local/src/remote_syslog/remote_syslog
 
 - name: Copy remote_syslog to /usr/local/bin
   shell: cp /usr/local/src/remote_syslog/remote_syslog /usr/local/bin/remote_syslog
@@ -43,17 +43,18 @@
 
 - name: Deploy remote_syslog conf
   template:
-    src=log_files.yml.j2
-    dest=/etc/log_files.yml
-    owner=root
-    group=root
-    mode=0640
-  notify: enable remote syslog
+    src: log_files.yml.j2
+    dest: /etc/log_files.yml
+    owner: root
+    group: root
+    mode: 0640
+  notify: enable remote_syslog
 
 - name: Create remote_syslog systemd service
   template:
-    src=papertrail.service
-    dest=/etc/systemd/system/remote_syslog.service
+    src: papertrail.service
+    dest: /etc/systemd/system/remote_syslog.service
   notify:
     - daemon-reload
-    - enable remote syslog
+    - enable remote_syslog
+    - restart remote_syslog

@@ -4,6 +4,10 @@ Ansible Role: Papertrail
 
 [![Build Status](https://travis-ci.org/chris-short/ansible-role-papertrail.svg?branch=master)](https://travis-ci.org/chris-short/ansible-role-papertrail)
 
+Split handlers branch:
+[![Build Status](https://travis-ci.org/flatrocks/ansible-role-papertrail.svg?branch=split_handlers)](https://travis-ci.org/chris-short/ansible-role-papertrail)
+
+
 Papertrail can utilize rsyslog and it's go utility remote_syslog2. This role configures and deploys all the neccessary bits to utilize Papertrail on EL7, Debian 8, and Ubuntu 16.04 systems
 
 Requirements

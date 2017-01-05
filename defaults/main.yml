@@ -1,9 +1,6 @@
 ---
 # defaults file for ansible-role-papertrail
-papertrail_version: "0.19"                                                                                                                        
-papertrail_files:                                                                                                                                 
-  - /var/log/cron
-  - /var/log/tuned/tuned.log                                                                                                                      
-  - /var/log/yum.log
-papertrail_host: []
-papertrail_port: []
+papertrail_version: "0.19"
+papertrail_files: []
+papertrail_host: ""
+papertrail_port: ""

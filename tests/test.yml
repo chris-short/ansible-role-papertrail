@@ -35,4 +35,11 @@
       when: ansible_pkg_mgr =='apt'
 
   roles:
-    - ansible-role-papertrail
+    role: ansible-role-papertrail
+    # vars:
+    #   papertrail_host: logs.papertrailapp.com
+    #   papertrail_port: 11111
+    #   papertrail_files:
+    #     - /var/log/cron
+    #     - /var/log/tuned/tuned.log
+    #     - /var/log/yum.log
