@@ -1,7 +1,14 @@
 ---
-- hosts: test
 
-  remote_user: root
+- hosts: all
+
+  # vars:
+  #   papertrail_host: logs.papertrailapp.com
+  #   papertrail_port: 11111
+  #   papertrail_files:
+  #     - /var/log/cron
+  #     - /var/log/tuned/tuned.log
+  #     - /var/log/yum.log
 
   pre_tasks:
     - name: Ensure build dependencies are installed (Fedora).
@@ -35,11 +42,4 @@
       when: ansible_pkg_mgr =='apt'
 
   roles:
-    role: ansible-role-papertrail
-    # vars:
-    #   papertrail_host: logs.papertrailapp.com
-    #   papertrail_port: 11111
-    #   papertrail_files:
-    #     - /var/log/cron
-    #     - /var/log/tuned/tuned.log
-    #     - /var/log/yum.log
+    - ansible-role-papertrail
