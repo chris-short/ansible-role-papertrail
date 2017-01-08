@@ -1,7 +1,12 @@
 ---
-- hosts: localhost
 
-  remote_user: root
+- hosts: all
+
+  vars:
+    papertrail_host: fake_host
+    papertrail_port: 11111
+    papertrail_files:
+      - /var/log/cron
 
   pre_tasks:
     - name: Ensure build dependencies are installed (Fedora).
