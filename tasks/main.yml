@@ -58,4 +58,16 @@
     - daemon-reload
     - enable remote_syslog
     - restart remote_syslog
-  when: ansible_distribution != 'CentOS' or ansible_distribution != 'Red Hat Enterprise Linux' and ansible_distribution_version >= '6'
+  when: ansible_service_mgr == 'systemd'
+
+- name: Create remote_syslog systemd service
+  template:
+    src: remote_syslog.init.d.j2
+    dest: /etc/init.d/remote_syslog
+    owner: root
+    group: root
+    mode: 0775
+  notify:
+    - enable remote_syslog.init.d
+    - restart remote_syslog.init.d
+  when: ansible_service_mgr != 'systemd'

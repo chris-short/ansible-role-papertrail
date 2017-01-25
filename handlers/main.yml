@@ -14,3 +14,13 @@
   service:
     name: remote_syslog.service
     state: restarted
+
+- name: enable remote_syslog.init.d
+  service:
+    name: remote_syslog
+    state: enabled
+
+- name: restart remote_syslog.init.d
+  service:
+    name: remote_syslog
+    state: restarted
