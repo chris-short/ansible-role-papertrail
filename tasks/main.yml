@@ -60,7 +60,7 @@
     - restart remote_syslog
   when: ansible_service_mgr == 'systemd'
 
-- name: Create remote_syslog systemd service
+- name: Create remote_syslog init.d service
   template:
     src: remote_syslog.init.d.j2
     dest: /etc/init.d/remote_syslog
@@ -71,3 +71,10 @@
     - enable remote_syslog.init.d
     - restart remote_syslog.init.d
   when: ansible_service_mgr != 'systemd'
+
+- shell: ps aux
+  register: result
+
+- debug:
+    var: result
+
