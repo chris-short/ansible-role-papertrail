@@ -18,7 +18,7 @@
 - name: enable remote_syslog.init.d
   service:
     name: remote_syslog
-    state: enabled
+    enabled: yes
 
 - name: restart remote_syslog.init.d
   service:
