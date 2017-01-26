@@ -36,13 +36,13 @@ script:
 
   # Check the role/playbook's syntax.
   - >
-    docker exec --tty "$(cat ${container_id})" env TERM=xterm
+    docker exec "$(cat ${container_id})" env TERM=xterm
     ansible-playbook -vvv /etc/ansible/roles/ansible-role-papertrail/tests/test.yml
     --syntax-check
 
   # Run the role/playbook with ansible-playbook.
   - >
-    docker exec --tty "$(cat ${container_id})" env TERM=xterm
+    docker exec "$(cat ${container_id})" env TERM=xterm
     ansible-playbook -vvv /etc/ansible/roles/ansible-role-papertrail/tests/test.yml
 
   # Run the role/playbook again, checking to make sure it's idempotent.
@@ -58,10 +58,10 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Ensure remote_syslog is installed.
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm which remote_syslog'
+  - 'docker exec "$(cat ${container_id})" env TERM=xterm which remote_syslog'
 
   # Stat files.
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm stat /etc/log_files.yml /etc/ssl/certs/papertrail-bundle.pem /etc/rsyslog.d/papertrail.conf /usr/local/bin/remote_syslog'
+  - 'docker exec "$(cat ${container_id})" env TERM=xterm stat /etc/log_files.yml /etc/ssl/certs/papertrail-bundle.pem /etc/rsyslog.d/papertrail.conf /usr/local/bin/remote_syslog'
 
   # Ensure rsyslog.service is running.
   - >
@@ -76,9 +76,9 @@ script:
     | grep [r]emote_syslog
 
   # Rough test of /etc/log_files.yml content
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm grep "  host: fake_host"       /etc/log_files.yml'
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm grep "  port: 11111"           /etc/log_files.yml'
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm grep "  - /var/log/cron"       /etc/log_files.yml'
+  - 'docker exec "$(cat ${container_id})" env TERM=xterm grep "  host: fake_host"       /etc/log_files.yml'
+  - 'docker exec "$(cat ${container_id})" env TERM=xterm grep "  port: 11111"           /etc/log_files.yml'
+  - 'docker exec "$(cat ${container_id})" env TERM=xterm grep "  - /var/log/cron"       /etc/log_files.yml'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
