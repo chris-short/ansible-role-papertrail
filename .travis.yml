@@ -67,13 +67,13 @@ script:
   - >
     docker exec --tty "$(cat ${container_id})" env TERM=xterm
     ps aux
-    | grep "[r]syslog"
+    | grep [r]syslog
 
   # Ensure remote_syslog.service is running.
   - >
     docker exec --tty "$(cat ${container_id})" env TERM=xterm
     ps aux
-    | grep "[r]emote_syslog"
+    | grep [r]emote_syslog
 
   # Rough test of /etc/log_files.yml content
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm grep "  host: fake_host"       /etc/log_files.yml'
