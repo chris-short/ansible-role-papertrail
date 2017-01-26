@@ -48,7 +48,6 @@
     owner: root
     group: root
     mode: 0640
-  notify: enable remote_syslog
 
 - name: Create remote_syslog systemd service
   template:
