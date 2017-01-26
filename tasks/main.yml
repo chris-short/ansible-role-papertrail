@@ -71,10 +71,3 @@
     - enable remote_syslog.init.d
     - restart remote_syslog.init.d
   when: ansible_service_mgr != 'systemd'
-
-- shell: ps aux
-  register: result
-
-- debug:
-    var: result
-
