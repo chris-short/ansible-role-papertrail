@@ -25,7 +25,7 @@ prog="remote_syslog"
 config="/etc/log_files.yml"
 pid_dir="/var/run"
 
-EXTRAOPTIONS=""
+EXTRAOPTIONS="--hostname=`hostname -s`"
 
 pid_file="$pid_dir/$prog.pid"
 
@@ -34,53 +34,83 @@ PATH=/sbin:/bin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:$PATH
 RETVAL=0
 
 is_running(){
-  [ -e $pid_file ]
+  # Do we have PID-file?
+  if [ -f "$pid_file" ]; then
+    # Check if proc is running
+    pid=`cat "$pid_file" 2> /dev/null`
+    if [[ $pid != "" ]]; then
+      exepath=`readlink /proc/"$pid"/exe 2> /dev/null`
+      exe=`basename "$exepath"`
+      if [[ $exe == "remote_syslog" ]] || [[ $exe == "remote_syslog (deleted)" ]]; then
+        # Process is running
+        return 0
+      fi
+    fi
+  fi
+  return 1
 }
 
 start(){
-    echo -n $"Starting $prog: "
+  echo "Starting $prog"
 
-    unset HOME MAIL USER USERNAME
-    $prog -c $config --pid-file=$pid_file $EXTRAOPTIONS
-    RETVAL=$?
-    echo
-    return $RETVAL
+  unset HOME MAIL USER USERNAME
+  $prog -c $config --pid-file=$pid_file $EXTRAOPTIONS
+  RETVAL=$?
+  return $RETVAL
 }
 
 stop(){
-    echo -n $"Stopping $prog: "
-    if (is_running); then
-      kill `cat $pid_file`
-      RETVAL=$?
-      echo
-      return $RETVAL
-    else
-      echo "$pid_file not found"
+  echo "Stopping $prog..."
+  if is_running; then
+    kill -TERM `cat $pid_file` >/dev/null 2>&1
+    sleep 1
+    if is_running && sleep 1 &&
+      is_running && sleep 3 &&
+      is_running ; then
+      kill -KILL `cat $pid_file` >/dev/null 2>&1
+      sleep 1
     fi
+
+    if is_running; then
+      echo "Failed to kill process"
+      RETVAL=1
+    else
+      echo "Stopped"
+      RETVAL=0
+      rm -f $pid_file
+    fi
+  else
+    echo "Not running"
+    RETVAL=0
+  fi
+
+  return $RETVAL
 }
 
 status(){
-    echo -n $"Checking for $pid_file: "
+  if (is_running); then
+    echo "Running"
+    RETVAL=0
+  else
+    echo "Not running"
+    RETVAL=3
+  fi
 
-    if (is_running); then
-      echo "found"
-    else
-      echo "not found"
-    fi
+  return $RETVAL
 }
 
 reload(){
-    restart
+  restart
 }
 
 restart(){
-    stop
-    start
+  stop
+  start
 }
 
 condrestart(){
-    is_running && restart
-    return 0
+  is_running && restart
+  return 0
 }
 
 
@@ -110,3 +140,4 @@ case "$1" in
 esac
 
 exit $RETVAL
+
